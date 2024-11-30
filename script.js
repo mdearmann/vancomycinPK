@@ -290,9 +290,9 @@ function addTargetRanges(chart) {
 function updateKineticParams(crCl, k, V, Cl) {
   document.getElementById('kinetic-params').innerHTML = `
       <p>Creatinine clearance (CrCl): ${crCl.toFixed(1)} mL/min</p>
-      <p>Elimination constant (Kel): ${k.toFixed(4)} hr⁻¹</p>
-      <p>Volume of distribution (Vd): ${V.toFixed(1)} L</p>
-      <p>Clearance (CLvanco): ${Cl.toFixed(1)} L/hr</p>
+      <p>Elimination constant (K<sub>e</sub>): ${k.toFixed(4)} hr⁻¹</p>
+      <p>Volume of distribution (V<sub>d</sub>): ${V.toFixed(1)} L</p>
+      <p>Clearance (Cl<sub>vanc</sub>): ${Cl.toFixed(1)} L/hr</p>
   `;
 }
 
@@ -571,9 +571,9 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset kinetic parameters
       document.getElementById('kinetic-params').innerHTML = `
           <p>Creatinine clearance (CrCl): ---</p>
-          <p>Elimination constant (Kel): ---</p>
-          <p>Volume of distribution (Vd): ---</p>
-          <p>Clearance (CLvanco): ---</p>
+          <p>Elimination constant (K<sub>e</sub>): ---</p>
+          <p>Volume of distribution (V<sub>d</sub>): ---</p>
+          <p>Clearance (Cl<sub>vanc</sub>): ---</p>
       `;
 
       // Reset PK values
