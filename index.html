@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VancPK</title>
+    
+    <!-- External Libraries -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Parkinsans:wght@300..800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Add MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div class="col-md-3 p-4">
+                <div class="sidebar">
+                    <h1 class="h3 mb-4 text-primary">Vancomycin Calculator</h1>
+                    
+                    <!-- Patient Information Section -->
+                    <h5 class="mb-3">Patient Information</h5>
+                    
+                    <!-- Input Fields -->
+                    <div class="mb-3">
+                        <label class="form-label">Age</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="age-input">
+                            <span class="input-group-text">years</span>
+                        </div>
+                    </div>
+
+                    <!-- Weight Input -->
+                    <div class="mb-3">
+                        <label class="form-label">Weight</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="weight-input">
+                            <span class="input-group-text">kg</span>
+                        </div>
+                    </div>
+
+                    <!-- Sex Selection -->
+                    <div class="mb-3">
+                        <label class="form-label">Sex</label>
+                        <div class="unit-toggle w-100">
+                            <button class="btn btn-outline-secondary flex-grow-1" data-sex="male">Male</button>
+                            <button class="btn btn-outline-secondary flex-grow-1" data-sex="female">Female</button>
+                        </div>
+                    </div>
+
+                    <!-- Height Input -->
+                    <div class="mb-3">
+                        <label class="form-label">Height</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="height-input">
+                            <span class="input-group-text">in</span>
+                        </div>
+                    </div>
+
+                    <!-- Creatinine Input -->
+                    <div class="mb-4">
+                        <label class="form-label">Creatinine</label>
+                        <div class="input-group">
+                            <input type="number" class="form-control" id="creatinine-input">
+                            <span class="input-group-text">mg/dL</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <button class="btn btn-primary w-100 mb-2" id="calculate-btn">Calculate Optimal Dose</button>
+                    <button class="btn btn-secondary w-100" id="clear-btn">Clear All</button>
+                </div>
+                
+                <!-- Add the new festive container here -->
+                <div class="side-festive-container mb-4">
+                <h3>Merry Christmas!</h3>
+                <div class="tree-image-container">
+                    <img src="https://images.unsplash.com/photo-1543590171-c63f78d54a7e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y2hyaXN0bWFzJTIwdHJlZXxlbnwwfHwwfHx8MA%3D%3D" alt="Christmas Tree" class="christmas-tree-image">
+                </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="col-md-9 main-content">
+                <!-- Suggested Dose Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <!-- Dose Input Section -->
+                            <div class="col-md-4">
+                                <h5>Suggested Dose</h5>
+                                <div class="mb-3">
+                                    <label class="form-label">Dose</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="dose-input">
+                                        <span class="input-group-text">mg</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Frequency</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="frequency-input">
+                                        <span class="input-group-text">hrs</span>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Infusion Time</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="infusion-input">
+                                        <span class="input-group-text">hrs</span>
+                                    </div>
+                                </div>
+                                <button class="btn btn-danger w-100" id="recalculate-btn">Recalculate</button>
+                            </div>
+
+                            <!-- Dosing Options Section -->
+                            <div class="col-md-8">
+                                <h5>Compare Dosing Options</h5>
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#q8h">q8h</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-bs-toggle="tab" href="#q12h">q12h</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#q24h">q24h</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#q36h">q36h</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-bs-toggle="tab" href="#q48h">q48h</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div id="q8h" class="tab-pane fade">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Dose</th>
+                                                        <th>AUC₂₄/MIC</th>
+                                                        <th>Peak</th>
+                                                        <th>Trough</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="dosingOptionsTable_q8h"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="q12h" class="tab-pane fade show active">
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Dose</th>
+                                                        <th>AUC₂₄/MIC</th>
+                                                        <th>Peak</th>
+                                                        <th>Trough</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="dosingOptionsTable_q12h"></tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="q24h" class="tab-pane fade">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Dose</th>
+                                                    <th>AUC₂₄/MIC</th>
+                                                    <th>Peak</th>
+                                                    <th>Trough</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dosingOptionsTable_q24h"></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="q36h" class="tab-pane fade">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Dose</th>
+                                                <th>AUC₂₄/MIC</th>
+                                                <th>Peak</th>
+                                                <th>Trough</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dosingOptionsTable_q36h"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="q48h" class="tab-pane fade">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Dose</th>
+                                            <th>AUC₂₄/MIC</th>
+                                            <th>Peak</th>
+                                            <th>Trough</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dosingOptionsTable_q48h"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Predicted PK Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="pk-container">
+                            <div class="pk-data">
+                                <h5>Predicted PK</h5>
+                                <div class="pk-value">
+                                    <span class="pk-label">Dose:</span> <span id="pk-dose">-- mg q--h</span>
+                                </div>
+                                <div class="pk-value">
+                                    <span class="pk-label">AUC₂₄/MIC:</span> <span id="pk-auc">-- mcg*hr/mL</span>
+                                </div>
+                                <div class="pk-value">
+                                    <span class="pk-label">Peak:</span> <span id="pk-peak">-- mcg/mL</span>
+                                </div>
+                                <div class="pk-value">
+                                    <span class="pk-label">Trough:</span> <span id="pk-trough">-- mcg/mL</span>
+                                </div>
+                            </div>
+                            <div class="pk-graph">
+                                <canvas id="pk-graph"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kinetic Parameters Card -->
+<div class="card">
+    <div class="card-body">
+        <h5>Kinetic Parameters</h5>
+        <div class="row g-0"> <!-- Added g-0 to remove default gutters -->
+            <!-- Left column: Kinetic Parameters -->
+            <div class="col-6 pe-4"> <!-- Added padding-end -->
+                <div id="kinetic-params">
+                    <p class="mb-2">Creatinine clearance (CrCl): ---</p>
+                    <p class="mb-2">Elimination constant (K<sub>e</sub>): ---</p>
+                    <p class="mb-2">Volume of distribution (V<sub>d</sub>): ---</p>
+                    <p class="mb-2">Clearance (Cl<sub>vanc</sub>): ---</p>
+                </div>
+            </div>
+            
+            <!-- Right column: Buttons -->
+            <div class="col-6 ps-4 border-start"> <!-- Added left border and padding-start -->
+                <div class="h-100 d-flex flex-column justify-content-center gap-3">
+                    <button class="btn btn-primary w-100" id="progress-note-btn">Generate Progress Note</button>
+                    <button class="btn btn-secondary w-100" id="pk-equations-btn">Show PK Equations</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+<div class="card">
+<div class="card-body">
+    <div class="holiday-message-box">
+        <h3>About</h3>
+        <div class="about-section">
+            <p> This calculator helps optimize vancomycin dosing for adult patients while predicting drug concentrations. The calculator follows current clinical guidelines focusing on AUC-guided dosing, with target AUC/MIC ratios of 400-600 mg*h/L. Recommendations are generated using established pharmacokinetic equations, including the Cockcroft-Gault and Matzke equations.</p>
+            <p> <span class="disclaimer-bold">*Disclaimer:</span> This calculator serves as an educational resource for healthcare professionals only. It should not replace clinical judgment, formal dosing guidelines, or professional medical evaluation and treatment decisions. </p>
+        </div>
+    </div>
+</div>
+</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning Messages Container -->
+    <div id="warning-messages" class="warning-messages"></div>
+
+    <!-- Progress Note Modal -->
+    <div class="modal fade" id="progress-note-modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Progress Note</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="progress-note-content" class="font-monospace"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="copy-note-btn">Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PK Equations Modal -->
+    <div class="modal fade" id="pk-equations-modal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Vancomycin PK Equations</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- [PK Equations content] -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
