@@ -1,0 +1,450 @@
+:root {
+  --primary: #C41E3A;    /* Christmas red */
+  --secondary: #146B3A;  /* Holly green */
+  --background: #FCF7F8; /* Snow white */
+  --accent: #AF0E10;     /* Deep red */
+  --primary-font: 'Bricolage Grotesque';
+  --header-font: 'Parkinsans';
+  --title-text-size: 2.6rem;
+  --standard-text-size: 0.875rem;
+}
+
+body {
+  background: repeating-linear-gradient(
+    45deg,
+    white,
+    white 10px,
+    #C41E3A 10px,
+    #C41E3A 20px
+  );
+  font-family: var(--primary-font);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Container overlay for readability */
+.container-fluid {
+  background-color: rgba(255, 255, 255, 0.95);
+  min-height: 100vh;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--primary),
+    var(--primary) 10px,
+    var(--holly-green) 10px,
+    var(--holly-green) 20px
+  );
+  z-index: 1000;
+}
+
+/* Sidebar Styles */
+.sidebar {
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 0 20px 20px 0;
+  padding: 25px;
+  box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+  position: relative;
+  border-left: 4px solid var(--primary);
+}
+
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* Button Styles */
+h1.text-primary {
+  color: var(--primary) !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+}
+
+h1.text-primary::after {
+  content: '🎄';
+  font-size: 1.6em;
+  margin-left: 10px;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--holly-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  border: none;
+  border-radius: 25px;
+  padding: 8px 20px;
+}
+
+.btn-secondary:hover {
+  background-color: var(--holly-green);
+}
+
+/* Card Styles - Updated for candy cane background */
+.card {
+  margin-bottom: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border: none;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--holly-green));
+}
+
+.card-body {
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+/* Table Styles */
+.table {
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+.table th {
+  background-color: var(--secondary);
+  color: white;
+  font-weight: 600;
+  padding: 15px;
+  border: none;
+}
+
+.table td {
+  background-color: white;
+  padding: 15px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.table tr {
+  margin-bottom: 8px;
+}
+
+/* Main Content Styles - Updated for candy cane background */
+.main-content {
+  background-color: transparent;
+  min-height: 100vh;
+  padding: 30px;
+  position: relative;
+}
+
+.main-content::after {
+  content: '❄';
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: var(--primary);
+  animation: snowfall 3s infinite linear;
+}
+
+@keyframes snowfall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(20px) rotate(360deg); }
+}
+
+/* PK Graph Container Styles - Updated for better contrast */
+.pk-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.98);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.pk-data {
+  padding: 20px;
+  background: var(--background);
+  border-radius: 15px;
+  border: 2px dashed var(--primary);
+}
+
+.pk-graph {
+  height: 300px;
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Modal Styles */
+.modal-content {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--primary), var(--holly-green));
+  color: white;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+}
+
+.modal-body {
+  padding: 25px;
+}
+
+.modal-footer {
+  background-color: var(--background);
+  border-radius: 0 0 20px 20px;
+  padding: 20px;
+}
+
+/* Form Styles */
+.form-control {
+  border-radius: 12px;
+  border: 2px solid #e0e0e0;
+  padding: 10px 15px;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pk-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    border-radius: 20px;
+    margin-bottom: 20px;
+    border-left: none;
+    border-top: 4px solid var(--primary);
+  }
+  
+  .card {
+    margin-bottom: 15px;
+  }
+}
+
+/* Additional Festive Elements */
+.nav-tabs .nav-link.active::before {
+  content: '🎅';
+  margin-right: 5px;
+}
+
+.alert {
+  border-radius: 15px;
+  border: none;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  position: relative;
+  padding-left: 45px;
+}
+
+.alert::before {
+  content: '🎁';
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Tree Image Container */
+.tree-image-container {
+  text-align: center;
+  padding: 15px 5px;
+  position: relative;
+  min-height: 180px;
+}
+
+.christmas-tree-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+/* Optional decorative elements */
+.tree-image-container::after {
+  content: '✨';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  animation: twinkle 1.5s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Festive Container Header Styles */
+.side-festive-container h3 {
+  color: #C41E3A;  /* Christmas red */
+  font-size: 1.3rem;
+  font-weight: 1000;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  background: linear-gradient(45deg, #C41E3A, #146B3A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Adjust spacing */
+  margin-top: 20px;  /* Add space above the header */
+  margin-bottom: 15px;
+  padding: 5px 0;
+  position: relative;  /* Add positioning context */
+  top: 10px;  /* Move header down by 10px */
+}
+
+/* Decorative elements */
+.side-festive-container h3::before,
+.side-festive-container h3::after {
+  margin: 0 8px;
+  font-size: 1em;
+  -webkit-text-fill-color: initial;
+}
+
+.holiday-message-box {
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-top: 1px;
+}
+
+.holiday-message-box h3 {
+  color: #C41E3A;
+  font-size: 1.3rem;
+  font-weight: 1000;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.holiday-content {
+  padding: 10px;
+}
+
+.about-section {
+  text-align: left;
+}
+
+.about-section p {
+  text-align: left;
+}
+
+.disclaimer-bold {
+  font-weight: bold;
+}
+
+/* Add these styles to your existing CSS */
+
+/* Main title */
+h1.text-primary {
+  font-size: 2rem !important;  /* Larger main title */
+}
+
+/* Section headers */
+h5 {
+  font-size: 1.5rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Input labels */
+.form-label {
+  font-size: 1.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Input text */
+.form-control {
+  font-size: 1.2rem !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* Unit toggle buttons */
+.unit-toggle .btn {
+  font-size: 1.1rem !important;
+  padding: 0.4rem 0.8rem !important;
+}
+
+/* Table headers and content */
+.table th,
+.table td {
+  font-size: 1.2rem !important;
+  padding: 0.75rem !important;
+}
+
+/* PK values */
+.pk-value {
+  font-size: 1.3rem !important;
+  margin-bottom: 0.8rem !important;
+}
+
+.pk-label {
+  font-weight: 500;
+  font-size: 1.3rem !important;
+}
+
+/* Kinetic parameters text */
+#kinetic-params p {
+  font-size: 1.2rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Action buttons */
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  font-size: 1.2rem !important;
+  padding: 0.5rem 1rem !important;
+}
+
+/* Warning messages */
+.alert {
+  font-size: 1.2rem !important;
+}
+
+/* Input group text (units) */
+.input-group-text {
+  font-size: 1.2rem !important;
+  padding: 0.5rem 0.75rem !important;
+}
